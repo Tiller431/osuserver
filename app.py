@@ -1,7 +1,8 @@
   
 import discord
 import os
-
+from handlers import dockerHandler as docker
+import time
 
 client = discord.Client()
 
@@ -22,11 +23,13 @@ async def on_message(message):
 
     # Create a server
     if content.startswith("-osucreate"):
-        await channel.send("WIP")
+        await channel.send(docker.createServer())
     
     # Remove server
-    if content.startswith("-osurm"):
-        await channel.send("WIP")
+    if content.startswith("-osurmall"):
+        start_time = time.time()
+        docker.rmALL()
+        await channel.send(f"Done! Took {start_time - time.time()} seconds!")
 
     # Stop server
     if content.startswith("-osustop"):
@@ -35,6 +38,12 @@ async def on_message(message):
     # Get status of a users server
     if content.startswith("-osustatus"):
         await channel.send("WIP")
+
+    # Restart main nginx server
+    if content.startswith("-restartnginx"):
+        start_time = time.time()
+        docker.rebuildNginx()
+        await channel.send(f"Done! Took {start_time - time.time()} seconds!")
 
 
 
