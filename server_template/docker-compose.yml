@@ -20,6 +20,7 @@ services:
       - OSU_API_KEY=$OSUKEY
       - DB_PASSWORD=$MYSQL_ROOT_PASSWORD
       - BANCHO_API_KEY=$CIKEY
+      - CHEESEGULL_API_URL=https://storage.ripple.moe/api
     volumes:
       - ./lets:/let.s/.data
     depends_on:
