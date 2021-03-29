@@ -2,9 +2,9 @@ version: '3.5'
 services:
   main_proxy:
     container_name: main_proxy
-    build: ./rippleginx
+    image: nginx
     volumes:
-      - ./keys/:/keys/
+      - ./servers/:/etc/nginx/conf.d/
     ports:
       - 80:80
       - 443:443

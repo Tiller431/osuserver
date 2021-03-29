@@ -2,3 +2,4 @@
 servers
 tester.py
 nginx-backend/keys
+*.pyc

@@ -19,11 +19,17 @@ async def on_message(message):
         return
 
     if content.startswith("-"):
-        print(f"----------\nProcessing command: {content}\nFrom: {user}\n----------")
+        await channel.send(f"----------\nProcessing command: {content}\nFrom: @{user}\n----------")
 
     # Create a server
     if content.startswith("-osucreate"):
-        await channel.send(docker.createServer())
+        start_time = round(time.time(), 2)
+        await channel.send("Starting creation process!")
+
+        url = docker.createServer()
+
+
+        await channel.send(f"Done! Took {round(time.time(), 2) - start_time} seconds!\nThe url to your server is: {url}")
     
     # Remove server
     if content.startswith("-osurmall"):

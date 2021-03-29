@@ -39,16 +39,16 @@ def rmStack(user_id):
 
 def updateNginx(user_id):
     subprocess.run(["/usr/bin/docker-compose", "down", "--rmi", "all"], cwd=os.path.realpath(".") + "/nginx-backend")
-    os.system(f"cp server_TEMPLATE.conf nginx-backend/rippleginx/servers/{user_id}.conf")
-    subprocess.call(["sed", "-i", "-e",  f's/SERVER_ID/{user_id}/g', f"nginx-backend/rippleginx/servers/{user_id}.conf"])
+    os.system(f"cp server_TEMPLATE.conf nginx-backend/servers/{user_id}.conf")
+    subprocess.call(["sed", "-i", "-e",  f's/SERVER_ID/{user_id}/g', f"nginx-backend/servers/{user_id}.conf"])
     subprocess.run(["/usr/bin/docker-compose", "up", "-d"], cwd=os.path.realpath(".") + "/nginx-backend")
 
 def rebuildNginx():
-    subprocess.run(["/usr/bin/docker-compose", "down", "--rmi", "all"], cwd=os.path.realpath(".") + "/nginx-backend")
+    subprocess.run(["/usr/bin/docker-compose", "kill"], cwd=os.path.realpath(".") + "/nginx-backend")
     subprocess.run(["/usr/bin/docker-compose", "up", "-d"], cwd=os.path.realpath(".") + "/nginx-backend")
 
 def rmNginx(user_id):
-    os.system(f"rm -rf nginx-backend/rippleginx/servers/{user_id}.conf")
+    os.system(f"rm -rf nginx-backend/servers/{user_id}.conf")
     rebuildNginx()
 
 
