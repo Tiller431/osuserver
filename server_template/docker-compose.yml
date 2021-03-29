@@ -81,8 +81,6 @@ services:
     container_name: ID_redis
     image: redis
     volumes:
-      - redis_vol:/data
+      - ./redis/:/data
     restart: on-failure
 
-volumes:
-  redis_vol:

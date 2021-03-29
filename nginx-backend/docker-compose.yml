@@ -5,6 +5,7 @@ services:
     image: nginx
     volumes:
       - ./servers/:/etc/nginx/conf.d/
+      - ./keys/:/keys/
     ports:
       - 80:80
       - 443:443
