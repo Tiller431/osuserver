@@ -23,7 +23,7 @@ async def on_message(message):
         print(f"----------\nProcessing command: {content}\nFrom: @{user}\n----------")
 
     # Create a server
-    if content.startswith("-osucreate"):
+    if content.startswith("-create"):
         start_time = round(time.time(), 2)
         process = threading.Thread(target=docker.createServer)
         process.start()
@@ -62,11 +62,11 @@ async def on_message(message):
         await channel.send("Done!")
 
     # Stop server
-    if content.startswith("-osustop"):
+    if content.startswith("-stop"):
         await channel.send("WIP")
     
     # Get status of a users server
-    if content.startswith("-osustatus"):
+    if content.startswith("-status"):
         await channel.send("WIP")
 
     # Restart main nginx server
