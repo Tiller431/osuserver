@@ -29,7 +29,7 @@ async def on_message(message):
         process.start()
         await channel.send(f"The url to your server is: {docker.getURL()}\nPlease allow about 30 seconds for the server to start. ")
     
-    if content.startswith("-masscreate"):
+    if content.startswith("-masscreate") and user.id == 140310636658688000:
         message = "The urls to your servers are: \n"
         try:
             num_servers = int(content.split(" ")[1])
@@ -37,9 +37,6 @@ async def on_message(message):
             await channel.send("please specify how many servers you would like")
             return
 
-        if num_servers > 25:
-            await channel.send("damn bruh i dont have that much server power to give away")
-            return
         for i in range(num_servers):
             i = i + 1
             process = threading.Thread(target=docker.createServer, args=(False, ))
@@ -48,7 +45,7 @@ async def on_message(message):
             message += f"https://osu.{i}.192.168.1.167.xip.io\n"
         await channel.send(message)
 
-    if content.startswith("-getallservers"):
+    if content.startswith("-getallservers") and user.id == 140310636658688000:
         message = "These are all of the servers running: \n"
         for i in range(docker.getNewID() - 1):
             i = i + 1
@@ -56,7 +53,7 @@ async def on_message(message):
         await channel.send(message)
 
     # Remove server
-    if content.startswith("-rmall"):
+    if content.startswith("-rmall") and user.id == 140310636658688000:
         start_time = time.time()
         docker.rmALL()
         await channel.send("Done!")
@@ -70,13 +67,13 @@ async def on_message(message):
         await channel.send("WIP")
 
     # Restart main nginx server
-    if content.startswith("-restartnginx"):
+    if content.startswith("-restartnginx") and user.id == 140310636658688000:
         start_time = time.time()
         docker.rebuildNginx()
         await channel.send(f"Done! Took {time.time() - start_time} seconds!")
     
     # Restart all osu! servers
-    if content.startswith("-restartall"):
+    if content.startswith("-restartall") and user.id == 140310636658688000:
         start_time = time.time()
         docker.restartAll()
         await channel.send(f"Done! Took {time.time() - start_time} seconds!")
